@@ -10,15 +10,12 @@ pygame.display.set_caption("Territorial Simulator")
 font = pygame.font.SysFont(None, 24)
 clock = pygame.time.Clock()
 
-import random
-all_coords = [(x, y) for x in range(MAP_WIDTH) for y in range(MAP_HEIGHT)]
-random.shuffle(all_coords)
-mid = len(all_coords) // 2
-territory_a = set(all_coords[:mid])
-territory_b = set(all_coords[mid:])
+half = MAP_WIDTH // 2
+territory_a = {(x, y) for x in range(half) for y in range(MAP_HEIGHT)}
+territory_b = {(x, y) for x in range(half, MAP_WIDTH) for y in range(MAP_HEIGHT)}
 
-country_a = Country("Alpha", 0.00, 0.01, territory_a)
-country_b = Country("Beta", 0.00, 0.02, territory_b)
+country_a = Country("Alpha", 0.0, 0.01, territory_a)
+country_b = Country("Beta", 0.0, 0.02, territory_b)
 countries = [country_a, country_b]
 
 war_manager = WarManager()
